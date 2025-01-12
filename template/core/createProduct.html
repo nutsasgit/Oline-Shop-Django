@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+  <title>{% block title %}Market{% endblock %}</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+      <li class="navigator"><a href="#">Products</a></li>
+         <li class="navigator"><a href="">Shoping</a></li>
+        <li class="navigator"><a href="">My Orders</a></li>
+      <li class="navigator"><a href="">Profile</a></li>
+      <li class="navigator"><a href="#">Change Password</a></li>
+      {% if request.user.is_authenticated %}
+      <li class="navigator"><a href="#">Logout</a></li>
+        {% else %}
+        <li class="navigator"><a href="#">Login</a></li>
+        {% endif %}
+
+    </ul>
+
+</nav>
+
+<form method="post" action="{%url 'create-product'%}">
+        {% csrf_token %}
+        <div>
+            <label for="id_name">Name:</label><br>
+            <input type="text" id="id_name" name="name"><br>
+        </div><br>
+        <div>
+            <label for="id_description">Description:</label>
+            <textarea id="id_description" name="description"></textarea>
+        </div><br>
+        <div>
+            <label for="id_price">Price:</label>
+            <input type="number" id="id_price" name="price">
+        </div><br>
+        <div>
+            <label for="id_stock">Quantity:</label>
+            <input type="number" id="id_stock" name="stock">
+        </div><br>
+        <div>
+            <label for="id_is_active">Activate:</label>
+            <input type="checkbox" id="id_is_active" name="is_active">
+        </div><br>
+        <button type = "submit">Save</button>
+
+    </form>
+
+</body>
+</html>

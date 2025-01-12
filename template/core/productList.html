@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+     <nav>
+    <ul>
+      <li class="navigator"><a href="#">Products</a></li>
+         <li class="navigator"><a href="">Shoping</a></li>
+        <li class="navigator"><a href="">My Orders</a></li>
+      <li class="navigator"><a href="">Profile</a></li>
+      <li class="navigator"><a href="#">Change Password</a></li>
+      {% if request.user.is_authenticated %}
+      <li class="navigator"><a href="#">Logout</a></li>
+        {% else %}
+        <li class="navigator"><a href="#">Login</a></li>
+        {% endif %}
+
+    </ul>
+  </nav>
+     {%block content %}
+     <div class="container">
+        <h1>We have best Market. Chooce your Product</h1>
+         <a href="{% url 'create-product' %}">create-product</a>
+         {%for product in object_list%}
+         <div class="row">
+             <h2>{{product.id}}</h2>
+             <h2><a href="{% url 'product-detail' product.id %}">{{product.name}}</a></h2>
+             <p>{{product.price}} USD<p>
+             <p>{{product.description}}<p>
+             <p><a href="{% url 'product-update' product.id %}">Update</a></p>
+             <p><a href="{% url 'product-delete' product.id %}">Delete</a></p>
+
+
+          </div>
+          {% endfor %}
+         <p>Still did not found? </p>
+     </div>
+
+<!--     { % block content %}-->
+     {% endblock %}
+
+
+</body>
+</html>
