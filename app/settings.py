@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-)#*x$o4!qgrd&gc(e17l#fh)-rb!vhx=+$9n=pa%joe%6w0u2$
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'registration.User'
 
 
 # Application definition
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'registration',
+
 ]
 
 MIDDLEWARE = [
@@ -100,6 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Ensure this is included
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -116,6 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_URL = 'static/'
 
 # Default primary key field type
